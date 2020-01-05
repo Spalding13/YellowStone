@@ -16,10 +16,10 @@ var campgroundRoutes = require("./routes/campgrounds"),
     indexRoutes      = require("./routes/index");
 
 //	-------------Remote DB Connection-------------------------------------
-//mongoose.connect(process.env.DATABASEURL ,{ useNewUrlParser: true });
+mongoose.connect(process.env.DATABASEURL ,{ useNewUrlParser: true });
 
 //	-------------Local DB Connection-------------------------------------
-mongoose.connect("mongodb://localhost/yellowstone",{ useNewUrlParser: true });
+//mongoose.connect("mongodb://localhost/yellowstone",{ useNewUrlParser: true });
 
 var apiKey = process.env.HERE_MAPS_API_KEY;
   
