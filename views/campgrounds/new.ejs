@@ -1,31 +1,39 @@
 <% include ../partials/header %>
 
-<div class="container">
-    <div class="row">
-        <h1 style="text-align:center;">Create a New Campground</h1>
-        <div style="width:30%; margin:25px auto; ">
-            <form action="/campgrounds" method="POST">
-                    <div class="form-group">
-                        <input class="form-control" type="text" placeholder="name" name="name">
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="text" placeholder="img url" name="image">
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="number" placeholder="price" name="price" min="0.01" step="0.01">
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="text" placeholder="description" name="description">
-                    </div>
-                    <div class="form-group">
+<div class="container text-center">
+    <div class="d-flex justify-content-center mb-4 mt-5">
+        <h1>Create a New Campground</h1>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="col-5">
+            <form action="/campgrounds" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="name" name="name" required="true">
+                </div>
+                <!-- file upload, then the form uses enctype="multipart/form-data"-->
+                 <div class="form-group">
+                    <input class="form-control-file" type="file" id="image" name="image" accept="image/*" required>
+                </div>
+                <!-- <div class="form-group">
+                    <input class="form-control" type="text" placeholder="img url" name="image">
+                </div> -->
+                <div class="form-group">
+                    <input class="form-control" type="number" placeholder="price" name="price" min="0.01" step="0.01">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Pleven, Bulgaria" name="location" required="true">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="description" name="description">
+                </div>
+                <div class="form-group">
                     <button class="btn btn-default btn-md btn-block btn-primary">Create</button>
-                    </div>
-                    
+                </div>
             </form>
             <a href="/campgrounds">Go Back</a>
         </div>  
-       
     </div>
+</div>
 </div>
 
 <% include ../partials/footer %>

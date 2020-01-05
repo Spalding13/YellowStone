@@ -3,6 +3,7 @@ body {
 }
 
 #landing-header {
+  text-shadow: 1px 1px 1px black;
   z-index: 1;
   position: relative;
   text-align: center;
@@ -91,7 +92,31 @@ body {
   }
 }
 
-/* Older browser support - .no-cssanimations class added by modernizr */
+/* Older browser support - .no-cssanimations class */
 .no-cssanimations .slideshow li {
 	opacity: 1;
+}
+
+/* Gradient background button */
+.gradientBtn {
+  background-image: linear-gradient(to right, #a1c4fd 0%, #c2e9fb 51%, #a1c4fd 100%);
+  margin: 10px;
+  padding: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  background-size: 200% auto;
+  color: white;
+  text-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 0 20px #eee;
+  border-radius: 10px;
+  animation-name: example;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+ }
+
+
+@keyframes example {
+  0% {background-position: to right;}
+  50% {background-position: right center;}
+  100% {background-position: to right;}
 }

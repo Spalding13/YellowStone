@@ -4,7 +4,7 @@ var Campground = require("../models/campground");
 var Comment = require("../models/comment");
 var middleware = require("../middleware");
 
-//Comments New
+// Comments New show form
 router.get("/new", middleware.isLoggedIn, function(req, res){
     // find campground by id
     console.log(req.params.id);
@@ -17,7 +17,7 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
     });
 });
 
-//Comments Create
+//Comments Create store comment to db and redirect
 router.post("/",middleware.isLoggedIn,function(req, res){
    //lookup campground using ID
    Campground.findById(req.params.id, function(err, campground){
@@ -30,10 +30,11 @@ router.post("/",middleware.isLoggedIn,function(req, res){
                req.flash("error", "Something went wrong");
                console.log(err);
            } else {
-               //add username and id to comments and save comment
+               // add username and id to comments and save comment
                comment.author.id = req.user._id;
                comment.author.username = req.user.username;
                comment.save();
+               // save comment to current campground and redirect
                campground.comments.push(comment);
                campground.save();
                req.flash("success", "Successfully added comment");

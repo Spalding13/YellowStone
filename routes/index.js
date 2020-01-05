@@ -10,7 +10,7 @@ router.get("/", function(req, res){
 
 // show register form
 router.get("/register", function(req, res){
-   res.render("register"); 
+  res.render("register", {page:"register"}); 
 });
 
 //handle sign up logic
@@ -23,7 +23,7 @@ router.post("/register", function(req, res){
             return res.redirect("/register");
         }
         passport.authenticate("local")(req, res, function(){
-           req.flash("success", "Welcome to YelpCamp " + user.username);
+           req.flash("success", "Welcome to YellowStone " + user.username);
            res.redirect("/campgrounds"); 
         });
     });
@@ -31,15 +31,28 @@ router.post("/register", function(req, res){
 
 //show login form
 router.get("/login", function(req, res){
-   res.render("login"); 
+  //get the last page visited to redirect later
+  var redirectionUrl = req.header('Referer');
+  req.cameFrom = redirectionUrl;
+  console.log(redirectionUrl);
+   res.render("login", {page:"login", lastPage: redirectionUrl}); 
 });
 
 //handling login logic
-router.post("/login", passport.authenticate("local", 
+router.post("/login", passport.authenticate("local",
     {
-        successRedirect: "/campgrounds",
-        failureRedirect: "/login"
+      failureRedirect: "/login",
+      failureFlash: true
     }), function(req, res){
+      //redirect user back 
+      req.flash("success", "Welcome to back " + req.user.username);
+      var lastPage = req.query.lastPage;
+      if(!lastPage.includes("/login")){
+        res.redirect(req.query.lastPage);   
+      }else{
+        res.redirect("/campgrounds"); 
+      }
+      
 });
 
 // logout route

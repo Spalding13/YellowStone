@@ -1,19 +1,71 @@
-.thumbnail img{
-    width: 100%;
+body{
+	background: #ECE9E6;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to top, #FFFFFF, #ECE9E6);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to top, #FFFFFF, #ECE9E6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	position: relative;
+	color: black;
 }
 
-.thumbnail{
-    padding: 0;
+section {
+	 min-height: 100vh; /* will cover the 100% of viewport */
+ 	overflow: hidden;
+ 	display: block;
+ 	position: relative;
+ 	padding-bottom: 70px;  
 }
 
-.thumbnail .caption-full{
-    padding: 9px;
+.customBg{
+	background: rgba(245, 245, 245, .5);
 }
 
-.delete-form{
-    display: inline;
+/*Campground card from index.ejs*/
+.campCard{
+	background: rgba(245, 245, 245, .5);
+}
+.campcard img{
+	
 }
 
-.campground{
-    font-size: 10px;
+#customHr {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+#campIcon{
+	margin-right: 1%;
+	height: 50px;
+	color: #FFEFBA;  /* fallback for old browsers */
+	color: -webkit-linear-gradient(to top, #FFFFFF, #FFEFBA);  /* Chrome 10-25, Safari 5.1-6 */
+	color: linear-gradient(to top, #FFFFFF, #FFEFBA); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#mapContainer {
+	height: 500px;
+	width: 100%;
+}
+
+.reviewFlexContainer {
+	margin: 0 auto;
+}
+
+.reviewEditContainer {
+	width: 90%;
+}
+
+.reviewTxt textarea{
+	width: 90%;
+}
+
+.reviewBtn {
+	margin: 0 auto;
+	margin-bottom: 100px;
+	width: 25%;
+}
+
+.footer {
+ position: absolute;
+ bottom: 0;
+ width: 100%;
 }

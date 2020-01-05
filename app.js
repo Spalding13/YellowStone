@@ -10,24 +10,30 @@ var express     = require("express"),
     seedDB      = require("./seeds");
     
 //requring routes
-var commentRoutes    = require("./routes/comments"),
-    campgroundRoutes = require("./routes/campgrounds"),
+var campgroundRoutes = require("./routes/campgrounds"),
+    commentRoutes    = require("./routes/comments"),
+    reviewRoutes     = require("./routes/reviews"),
     indexRoutes      = require("./routes/index");
 
-console.log(process.env.DATABASEURL);
-//mongoose.connect("mongodb+srv://admin:Iguanaman_1@cluster0-0oqbe.mongodb.net/test?retryWrites=true",{ useNewUrlParser: true });
-//mongoose.connect("mongodb://localhost/yelp_camp",{ useNewUrlParser: true });
+//	-------------Remote DB Connection-------------------------------------
+//mongoose.connect(process.env.DATABASEURL ,{ useNewUrlParser: true });
 
-mongoose.connect(process.env.DATABASEURL,{ useNewUrlParser: true });
+//	-------------Local DB Connection-------------------------------------
+mongoose.connect("mongodb://localhost/yellowstone",{ useNewUrlParser: true });
 
-
-app.use(bodyParser.urlencoded({extended: true}));
+var apiKey = process.env.HERE_MAPS_API_KEY;
+  
 app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.use(express.static(__dirname + "/public"));
 app.use(flash());
 
-//seedDB(); seed the database
+//seedDB(); seed the database for tests
+
+// MOMENTJS configured and loaded in app as a global variable. Available for all views. 
+app.locals.moment = require('moment');
+app.locals.moment.locale("en");
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
@@ -38,6 +44,9 @@ app.use(require("express-session")({
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
+//done takes the profile info and attaches it on the request object
+//so its available on your callback as req.user.
+// done(error, user, messageObject)
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -52,7 +61,8 @@ app.use(function(req, res, next){
 app.use("/", indexRoutes);
 app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
+app.use("/campgrounds/:id/reviews", reviewRoutes);
 
-app.listen(process.env.PORT, process.env.IP, function(){
-   console.log("The YelpCamp Server Has Started!");
-});
+app.listen(4000, function(){
+   console.log("The YellowStone Server Has Started!");
+});  
